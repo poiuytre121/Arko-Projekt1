@@ -1,6 +1,6 @@
 section .text
 org 100h
-
+start:
 mov ah,8 ;pobiera znak z klawiatury bez echa
 int 21h
 
