@@ -5,5 +5,5 @@ przez u¿ytkownika klawisza ENTER. Wykorzystaæ procedury i stos. Przewidzieæ sytu
 
 
 Moje notatki:
-Za poprawne znaki uzna³em te których kod dziesiêtny ASCII nale¿y do przedzia³u <20;126>
+Za poprawne znaki uzna³em te których kod dziesiêtny ASCII nale¿y do przedzia³u <32;126>
 Wciœniêcie innego znaku bêdzie powodowa³o komunikat o b³êdzie.
