@@ -2,3 +2,8 @@
 czy zawieraj¹ t¹ sam¹ liczbê liter, wypisuj¹c na ekran stosowny komunikat. Program powinien
 móc wielokrotnie powtarzaæ operacjê z ró¿nymi ci¹gami znaków oraz zakoñczyæ pracê po naciœniêciu
 przez u¿ytkownika klawisza ENTER. Wykorzystaæ procedury i stos. Przewidzieæ sytuacje wyj¹tkowe.
+
+
+Moje notatki:
+Za poprawne znaki uzna³em te których kod dziesiêtny ASCII nale¿y do przedzia³u <20;126>
+Wciœniêcie innego znaku bêdzie powodowa³o komunikat o b³êdzie.
