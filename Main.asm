@@ -23,6 +23,13 @@ jmp start ;zaczyna przetwarzać ciągi od początku
 
 ;//funkcje
 
+;///ta funkcja kończy pracę programu i wypisuje wiadomość pożegnalną
+koniec:
+mov dx,napis_koniec_programu
+call wypisz
+mov ax,4C00h
+int 21h
+
 ;///porównuje długość dwóch ostatnich ciągów znaków
 porownaj:
 push bp
@@ -50,22 +57,46 @@ zliczaj:
 mov cx,0
 petla:
 call wczytaj_znak ;znak jest w al
+
 cmp al,13
 je koniec ;jeżeli to enter wyjdź z programu
+
+call sprawdzenie_znaku ;obsługa niepoprawnych wciśnięć
+cmp bl,1
+je petla
+
 add cx,1 ;zwiększ wartość licznika długości ciągu
-cmp al,9
-jne petla
+
+cmp al,9 
+jne petla ;jeżeli to nie TAB to pobierz kolejny znak
+
 mov ah,2 ;przenosi kursor do nowej linii
 mov dl,10
 int 21h
 ret
+;///funkcja sprawdza, czy podany znak ma kod ascii z przedziału <20;126>
+;///jeżeli tak, zwraca 0 do rejestru bl, jeżeli nie zwraca 1 do rejestru bl
+sprawdzenie_znaku:
+cmp al,9
+je dobry_znak
 
-;///ta funkcja kończy pracę programu i wypisuje wiadomość pożegnalną
-koniec:
-mov dx,napis_koniec_programu
-call wypisz
-mov ax,4C00h
-int 21h
+cmp al,0
+je znak_zero
+cmp al,32
+jb zly_znak
+
+cmp al,126
+ja zly_znak
+
+dobry_znak:
+mov bl,0
+ret
+znak_zero:
+call wczytaj_znak
+zly_znak:
+mov bl,1
+call wypisz_blad
+ret
 
 ;///wypisuje ciąg znaków z rejestru dx
 wypisz:
@@ -109,4 +140,4 @@ napis_ciagi_rozne db "Givem strings have different lengths",10,"$"
 napis_wczytaj_ciag_1 db "Enter first string, TAB key ends entering",10,"$"
 napis_wczytaj_ciag_2 db "Enter second string, TAB key ends entering",10,"$"
 napis_koniec_programu db "Return key was hit, thank you for using this program :)$"
-napis_bledny_znak db "This key doesn't match any number, letter or visible sign, please enter proper character",10,"$"
+napis_bledny_znak db "This key doesn't match any number, letter or visible sign, please continue entering string using proper characters",10,"$"
