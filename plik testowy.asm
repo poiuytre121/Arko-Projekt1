@@ -22,6 +22,6 @@ int 21h
 ;kod tabulatora = 9
 ;kod entera = 13
 ;kod end = (0;79)
-
+;http://brebru.com/asciicodes.html strona z kodami dwuczęściowymi
 section .data
 napis db "Weszlo$"
